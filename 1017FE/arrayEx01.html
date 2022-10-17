@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArrayExample</title>
+</head>
+
+<body>
+
+    <script>
+        //과일을 잘 다루어야한다.
+        //변수를 이용하여 과일을 준비
+        const apple='사과';
+        const orange='오렌지';
+        const pear='배';
+        const strawbery='딸기';
+
+        //배열을 이용하여 과일을 준비
+        //js에서는 {}기호는 객체!
+        const fruits = ['사과','오렌지','배','딸기']; 
+        console.log(fruits);
+        console.log(fruits[0]);
+        const i=3;
+        console.log(fruits[i+1]); //인덱스 안맞춰도 프로그램이 다운되지않음. undefined뜸.
+
+        const arrayOfArray = [  //Collection와 특징이 거의 같다고 봐도 무관. 늘어날 수 있.
+            [1,2,3],
+            ['A',5]
+        ]
+        alert(arrayOfArray[1][0]);
+        const a=10;
+        const b=20;
+        const variableArray=[a,b,30];
+
+        alert(variableArray[0]);
+
+        //js에서 배열은 같은 타입이 아니더라도 뭐든지 담을 수 있다.
+        const everythis = ['사과',1,undefined,true,"배열",null];
+        const duplicated = ['가','가','가'];
+        const empty = [];
+
+        console.log(everythis);
+        console.log(everythis.length);
+        console.log(everythis.duplicated);
+
+        empty[0] = 'f';
+        empty[1] = 'df';
+        empty[2] = 'dsf';
+        console.log(empty);
+
+        let target = ['나','다','라','마','바'];  //배열에 물리적으론 인덱스 값들을 밀어낼 순x
+        target.unshift('가');   //맨앞에 인덱스에 값을 추가하는 명령어.
+        target.unshift('호우');
+        target.push('불호우');  //맨 뒤에 인덱스에 값을 추가하는 명령어. push
+        console.log(target);
+        target.pop();           //맨 뒤에 값을 꺼내는 명령어.
+        console.log(target);
+        target.push('꿔');
+        console.log(target);
+        alert(target.pop());
+        target.shift();         //맨 앞에 값 삭제.
+        console.log(target);
+        target.splice(1,2);
+        const result = target.indexOf('다');
+        const result1 = target.lastIndexOf('마');
+        const result2 = target.indexOf('캬');
+        console.log(result);
+        console.log(result1);
+        console.log(result2);
+
+        let target1 = ['가','나','다','라','마'];   //이 데이터가 있는동안 반복 되어야 하기에 for문은 적절치 않다.
+        let j=0;
+        while(j<target1.length){
+            console.log(target[i]);
+            i++;
+        }//이 구조가 일반적, 가변적일 수 있기에....
+
+    </script>
+</body>
+</html>
