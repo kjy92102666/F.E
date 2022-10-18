@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사칙연산 계산기</title>
+    <style>
+        *{
+           margin : 0px;
+           padding: 0px; 
+
+        }
+        body {
+
+            position: relatives;
+            width: 600px;
+            margin: 50px auto;
+            padding: 10px;              /*안여백*/
+            border: 10px solid #eee;  /*안여백*/
+            text-align: center;         /*무조건은 아니고 리와트?*/
+            font-size: 1.2em;           /*em : 배수개념. 1.5배*/
+            border-radius: 50px;
+        }
+        form{
+            width: 400px;     /*width는 지정하지만 height는 자동으로 늘어나고 줄어들도록.(예외빼고))*/
+            margin: 40px auto;
+            padding: 50px;
+            border: 5px solid #ccc;
+            text-align: left;
+            background-color: antiquewhite;
+ 
+        }
+        input {
+            width: 150px;
+            padding: 5px; /*padding을 주면 높이가 자동으로 주게된다.*/
+            margin-bottom: 10px;
+            font-size: 1.5em;
+
+        }
+        input[type=botton]{
+            width: 50px;
+            border-radius: 50%;
+            border: 3px solid #999;
+            text-align: center;
+        }
+        h1{
+            font-size: 1.2em;
+            position: absolute;
+            top: 30px;
+            left: 380px;
+            border:5px solid #ddd;
+            padding: 5px;
+            background-color: aqua;
+            
+        }
+    </style>
+</head>
+
+<body>
+    <form name="f1">
+        <h1>간단한 사칙연산 계산기</h1>
+        A : <input type="text" name="a" id="a" /></br>
+        B : <input type="text" name="b" id="b" /></br>
+        Result : <input type="text" size="5" name="result" id="result" /> <br/>
+        <input type="botton" size="5" value="+" onclick="add()" />
+        <input type="botton" size="5" value="-" onclick="sub()" />
+        <input type="botton" size="5" value="x" onclick="mul()" />
+        <input type="botton" size="5" value="÷" onclick="div()" />
+
+    </form>
+
+<!--  -->
+
+</body>
+</html>
+
+<script>
+    function add(){
+        const aNum = parseInt(document.f1.a.value);
+        const bNum = parseInt(document.f1.b.value);
+        const result = aNum+bNum;
+        document.f1.result.value=result;
+    }
+    function sub(){ //왜  min하면 안될까?
+    const aNum = parseInt(document.f1.a.value);
+    const bNum = parseInt(document.f1.b.value);
+    const result = aNum-bNum;
+    document.f1.result.value=result;
+    }
+    function mul(){
+        const aNum = parseFloat(document.f1.a.value);
+        const bNum = parseFloat(document.f1.b.value);
+        const result = aNum*bNum;
+        document.f1.result.value=result;
+    }
+    function div(){
+        const aNum = parseFloat(document.f1.a.value);
+        const bNum = parseFloat(document.f1.b.value);
+        const result = (aNum/bNum);
+        document.f1.result.value=result.toFixed(2);
+    }
+
+    
+
+</script>
