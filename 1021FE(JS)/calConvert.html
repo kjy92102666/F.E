@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cal_Convert</title>
+
+
+    <!--https://cafe.naver.com/webdev2202 
+        보고 왜 출력안되는지 해결하기!!-->
+    <style>
+        *{ margin : 0px;
+           padding: 0px;   }
+        body {
+            position: relatives;
+            width: 600px;
+            margin: 50px auto;
+            padding: 10px;              /*안여백*/
+            border: 10px solid #eee;  /*안여백*/
+            text-align: center;         /*무조건은 아니고 리와트?*/
+            font-size: 1.2em;           /*em : 배수개념. 1.5배*/
+            border-radius: 50px;
+        }
+        #form1{
+            width: 400px;     /*width는 지정하지만 height는 자동으로 늘어나고 줄어들도록.(예외빼고))*/
+            margin: 40px auto;
+            padding: 50px;
+            border: 5px solid #ccc;
+            text-align: left;
+            background-color: antiquewhite;
+        }
+        input {
+            width: 150px;
+            padding: 5px; /*padding을 주면 높이가 자동으로 주게된다.*/
+            margin-bottom: 10px;
+            font-size: 1.5em;
+        }
+        input[type=botton]{
+            width: 50px;
+            border-radius: 50%;
+            border: 3px solid #999;
+            text-align: center;
+        }
+        h1{
+            font-size: 1.2em;
+            position: absolute;
+            top: 30px;
+            left: 380px;
+            border:5px solid #ddd;
+            padding: 5px;
+            background-color: aqua;
+            
+        }
+        button {
+            width : 50px;
+            padding : 5px;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div id="form1">
+        <h1>간단한 사칙연산 계산기</h1>
+        A : <input type="text" name="a" id="a" value="0"/></br><!--초기값 설정시value:-->
+        B : <input type="text" name="b" id="b" value="0"/></br>
+        Result : <input type="text" id="result" value="0" /> 
+        <!-- <button name="btnAdd" id="btnAdd">+</button>-->
+        <button>+</button>
+        <button>-</button>
+        <button>X</button>
+        <button>÷</button>
+
+        <script>
+
+            //UI요소를 자바스크립트 영역의 변수화
+            const $buttons = document.querySelectorAll('button'); //select 하는 대상한테 쓴다.#id, .클래스 ,아무것도 없으면 태그)
+            
+            const $inputA = documnet.querySelector('#a');
+            const $inputB = documnet.querySelector('#b');
+            const $result = documnet.querySelector('#result');
+            //console.log("==" + $buttons[0]);
+
+            //기능처리를 위한 변수 설정.  이렇게 쓰는 방식이 좋지않다?전역변수.... 함수 안에서 처리해야된대.
+            let numA = 0;
+            let numB = 0;
+            let result_ = 0;
+            
+            const onInputA = (event) =>{    //에러 펑션? 일반적인 함수호출방식 x . 함수가 변수안에 들어있다.
+                numA = event.target.value;
+                //입력체크 기능. 숫자가 아니면 다 체크한다~
+                if(!isNan(event.target.value)){ //지금 입력한 값이 정말 값이아니냐..?.
+                    numA = event.target.value
+                }else{
+                    event.target.value='';
+                }
+                console.log(numA);
+            };
+
+            const onInputB = (event) =>{    //에러 펑션? 일반적인 함수호출방식 x . 함수가 변수안에 들어있다.
+                numB = event.target.value;
+                //console.log(numB);
+            };
+
+            const onAdd = ()=>{
+                result_ = numA + numB;
+                $result.value = result_;
+                
+            }
+            // const onInput = (event)=>{
+            //     result = event.target.value;
+            // }
+            // $button.addEventListener('click', add);
+            // $input.addEventListener('input', onInput);
+        
+            const onSub = () =>{ //왜  min하면 안될까?
+                result_ = parseInt(numA) + parseInt(numB);
+                $result.value = result_;
+            }
+            const onMul = () =>{
+                result_ = numA - numB;
+                $result.value = result_;
+            }
+            const onDiv = () =>{
+                result_ = numA + numB;
+                $result.value = result_;
+            }
+            
+            $inputA.addEventListener('input', onInputA);
+            $inputB.addEventListener('input', onInputB);
+            $buttons[0].addEventAListener('click', onAdd);
+            console.log("type : " + onAdd)
+            $buttons[1].addEventAListener('click', onSub);
+            $buttons[2].addEventAListener('click', onMul);
+            $buttons[3].addEventAListener('click', onDiv);
+        
+        </script>
+
+    </div>
+<!-- 
+    <form name="f1">
+        <h1>간단한 사칙연산 계산기</h1>
+        A : <input type="text" name="a" id="a" /></br>
+        B : <input type="text" name="b" id="b" /></br>
+        Result : <input type="text" size="5" name="result" id="$result" /> <br/>
+        <input type="botton" size="5" value="+" onclickButton="add()" />
+        <input type="botton" size="5" value="-" onclickButton="sub()" />
+        <input type="botton" size="5" value="x" onclickButton="mul()" />
+        <input type="botton" size="5" value="÷" onclickButton="div()" />
+
+    </form> -->
+
+</body>
+</html>
+

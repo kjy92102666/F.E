@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>계산기</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        
+        #content { /* 얘를 body에서 정렬을 또 해야함. */
+            width: 400px;
+            margin: 50px auto;
+            border: 10px solid rgb(173, 215, 174);
+            padding: 5px;
+        }
+        
+        #result {
+            width: 180px;
+            height: 50px;
+            margin: 5px;
+            text-align: right;
+        }
+
+        #operator{ /*사칙연산 박스css*/
+            width:50px;
+            height: 50px;
+            margin: 5px;
+            text-align: center;
+        }
+
+        button {
+            width:50px;
+            height: 50px;
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<!-- 이항연산만 가능하게 할 예정. -->
+<body>
+    <div id="content">
+    <input id="operator" type="text">
+    <input id="result"   type="number" > 
+
+    <!--자판기 키보드 순서.-->
+    <div class="row">
+        <button id="¹/x">¹/x</button>
+        <button id="x²">x²</button>
+        <button id="±">±</button>
+        <button id=".">.</button>
+    </div>
+
+    <div class="row">
+        <button id="num-7">7</button>
+        <button id="num-8">8</button>
+        <button id="num-9">9</button>
+        <button id="plus">+</button>
+    </div>
+    <div class="row">
+        <button id="num-4">4</button>
+        <button id="num-5">5</button>
+        <button id="num-6">6</button>
+        <button id="minus">-</button>
+    </div>
+    <div class="row">
+        <button id="num-1">1</button>
+        <button id="num-2">2</button>
+        <button id="num-3">3</button>
+        <button id="divide">÷</button>
+    </div>
+    <div class="row">
+        <button id="clear">c</button>
+        <button id="num-0">0</button>
+        <button id="calculate">=</button>
+        <button id="multiple">X</button>
+    </div>
+
+</div>
+
+<script>
+//ui변수 작업, 자체 변수작업. 이렇게 2가지 작업을 해야한다.
+    //계산기 변수 설정
+    let numOne='';
+    let operator = '';
+    let numTwo = '';
+
+    // 계산기 UI 변수 설정
+    const $operator = document.querySelector('#operator');  
+    const $result = document.querySelector('#result');      //$result는 UI 자체.
+
+    const onClickNumber = (event)=>{//함수의 주소를 갖는다. 가리킨다~
+        if(!operator) {//operator가 없으면, ==아직 연산자기호를 누르지 않았다. 3(1) +(2) 4(3)  //()안에 입력받는순서
+            // 첫번쨰 숫자 처리
+            numOne += event.target.textContent; //숫자만 입력되는 명령.
+            $result.value += event.target.textContent;
+            return;
+        }
+        if(!numTwo){    //js에서는 값이 있으면 t, 없으면f
+            $result.value = ''; //기존 입력값 삭제. 두번째 값 받기전에 빈화면만들기위함.
+        }
+        numTwo += event.target.textContent; //숫자만 입력되는 명령.
+        $result.value += event.target.textContent;
+
+
+    };//이벤트 함수영역 끝.
+
+
+
+
+
+    //function onClickNumber() {}. 함수 선언 방법. 호출시  ...onClickNumber().로 호출.
+    
+    //연산자 처리
+    const onClickOperator = (op)=>()=>{  //연산기호가 들어온 걸, 다시 ()에 보낸다.
+        if(numOne){   //값이 있는지 없는지에 따라서 t/f 분별가능.
+            operator = op;
+            $operator.value = op; //화면출력변수
+        }else {
+            alert('숫자를 먼저 입력하시오.');
+        }
+    }
+
+    document.querySelector('#num-0').addEventListener('click', onClickNumber);
+    document.querySelector('#num-1').addEventListener('click', onClickNumber);
+    document.querySelector('#num-2').addEventListener('click', onClickNumber);
+    document.querySelector('#num-3').addEventListener('click', onClickNumber);
+    document.querySelector('#num-4').addEventListener('click', onClickNumber);
+    document.querySelector('#num-5').addEventListener('click', onClickNumber);
+    document.querySelector('#num-6').addEventListener('click', onClickNumber);
+    document.querySelector('#num-7').addEventListener('click', onClickNumber);
+    document.querySelector('#num-8').addEventListener('click', onClickNumber);
+    document.querySelector('#num-9').addEventListener('click', onClickNumber);
+    
+    //연산자 등록
+    document.querySelector('#plus').addEventListener('click', onClickOperator ('+'));//number를 operator로 한번에 바꾸는 기능이 있다?
+    document.querySelector('#minus').addEventListener('click', onClickOperator ('-'));
+    document.querySelector('#divide').addEventListener('click', onClickOperator ('/'));
+    document.querySelector('#multiple').addEventListener('click', onClickOperator ('x'));
+    document.querySelector('#x²').addEventListener('click', onClickOperator ('x²'));
+    document.querySelector('#calculate').addEventListener('click', ()=> {   //얘는 직접 보낸다? 에러펑션? 람다식.
+        
+
+        //최종 계산식 구현
+        if(numTwo){
+            switch(operator){
+                case'+':
+                $result.value = parseInt(numOne) + parseInt(numTwo);
+                break;
+                case'-':
+                $result.value = parseInt(numOne) - parseInt(numTwo);
+                break;
+                case'x':
+                $result.value = parseInt(numOne) * parseInt(numTwo);
+                break;
+                case'/':
+                $result.value = parseFloat(numOne) / parseFloat(numTwo);
+                break;
+                case'¹/x':
+                $result.value = parseFloat(numOne) / parseFloat(numTwo);
+                break;
+                case'x²':
+                $result.value = parseInt(numOne)*parseInt(numOne) ;
+                break;
+                case'±':
+                $result.value = parseFloat(numOne) / parseFloat(numTwo);
+                break;
+                case'.':
+                $result.value = parseFloat(numOne) / parseFloat(numTwo);
+                break;
+            }
+        }else {
+            alert('숫자를 먼저 입력하세요.');
+        }
+    });
+
+    documnet.querySelector('#clear').addEventListener('click', ()=>{
+        numOne='';
+        operator='';
+        numTwo='';
+        $operator.value='';
+        $result.value = '';
+    });
+
+    documnet.querySelector('#x²').addEventListener('click', ()=>{
+        if(numOne){
+            $result.value += parseInt(numOne)*parseInt(numOne);
+        }else{
+            alert('숫자를 먼저 입력하세요.');
+        }
+
+    });
+
+
+    
+</script>
+
+</body>
+</html>
+
+<!-- https://cafe.naver.com/webdev2202 -->
