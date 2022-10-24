@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script>
+
+       
+
+        $(document).ready(function(){
+            //내용들이 들어갈 곳.
+            $("p").click(function(){    //jquery는 다 셀렉트. 
+                $(this).hide();             //this는 자바this와 유사.(클릭한 것.) hide()가 display: none; 하는것.
+                //$(this).show();
+            });
+
+            $("#you").click(function(){   
+                $("p").show();          
+            });
+
+        });
+
+        
+        </script>
+
+</head>
+<body>
+
+<div>
+    <p id = "you">If you click on me, I will disappear.</p>
+    <p>Click me away!1</p>
+    <p>Click me too2!</p>        <!-- 클릭시, style="display: none;"  내용이 사라지는게 아니라 감춰놓는 방식. 개발자모드로 확인하기-->
+    <p id = "me">Click me away!3</p>
+    <p>Click me too!4</p>
+</div>
+
+</body>
+</html>

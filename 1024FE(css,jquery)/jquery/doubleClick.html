@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#p1").mouseenter(function(){
+                $(this).hide(); 
+            });
+            $("#me").mouseenter(function(){
+                $("p1").show(); 
+            });
+        });
+    </script>
+    
+</head>
+<body>
+    <p>Enter this <span id="p1">hihihihi</span>  paragraph.</p>   <!--태그 안에서도 영역 잡을때, span-->
+    <p id="me"> Click!! 1</p>
+    <p id="me"> Click!! 2</p>
+    <p id="me"> Click!! 3</p>
+</body>
+</html>
