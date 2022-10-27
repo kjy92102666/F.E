@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title> 이벤트 </title>  
+<script src="js/jquery.js"></script>
+<script>
+$(function(){
+		$(".btn_1.on").on("mouseover focus", function() {
+			alert("HELLO!");
+		});
+		$(".btn_1").addClass("on");	//클래스를 추가시켜준다. 여기에 on이
+
+		$(document).on("mouseover focus",".btn_2.on", function() { //".btn_2.on 이on이다~
+				alert("WELCOME!");
+		});
+		$(".btn_2").addClass("on");
+});
+</script>
+</head>
+<body>
+	<div id="wrap">
+		<p><button class="btn_1">버튼1</button></p>	<!--결과창에 보면 btn_1.on-->
+		<p><button class="btn_2">버튼2</button></p>
+	</div>
+</body>
+</html>
