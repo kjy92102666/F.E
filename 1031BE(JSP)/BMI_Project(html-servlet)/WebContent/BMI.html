@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	#content{
+		width:400px;	/*폼 크기, 마진(크기, 정렬-자동),aa,안여백.)*/
+		margin:30px auto;
+		border: 10px solid #ddd;
+		padding: 50px;
+		
+	}
+</style>
+</head>
+
+<body>
+	<div id="content">
+		<h1>BMI 지수 구하기</h1>
+		<form action="bmi" method="get">
+			신장 : <input type="text" name="height">cm<br><br>	<!-- name이 변수가 되어 값이 날라감. -->
+			체중 : <input type="text" name="weight">kg<br>
+			<input type="submit" value="계산">
+		</form>
+	</div>
+</body>
+</html>
