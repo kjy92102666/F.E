@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로또 추첨기</title>
+
+    <style>
+        .ball{
+            display: inline-block;
+            border : 1px solid black; 
+            border-radius: 20px;    /*==50%*/
+            width : 40px;
+            height : 40px;
+            line-height: 40px;
+            font-size: 20px;
+            text-align: center;
+            margin-right: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="result">추첨 결과는 : </div>
+    <div id="bonus">보너스 : </div>
+    
+
+    <script>
+        // 로또 번호 생성 : 1~45의 숫자를 생성.
+        const candidate = Array(45).fill().map((v,i)=>i+1); //for문으로 45까지 만든것과 같은 식.
+        //Array(45)공간을 생성,  .fill() : 채워넣는다, .map((v,i)) : 가상의 v(형식적인틀)와 i(0부터 증감)가 있
+        console.log(candidate);
+        const shuffle =[];
+
+        while(candidate.length>0){  //splice로 잘라내기에 length는 줄어든다.
+        //숫자를 섞는 과정
+        const num = Math.floor(Math.random()*candidate.length);
+        //Math.floor 내림해서, int형태로 나타낸다.(소숫점 없앤다.)
+        const spliceArray = candidate.splice(num,1);
+        console.log(spliceArray);
+        const value = spliceArray[0];   //배열에 들어 있는 값을 꺼내어 shuffle에 대입.
+        shuffle.push(value);
+    }
+    console.log(shuffle);
+    //숫자를 추출하는 과정
+    //comparable : 객체의 비교 기준을 각자 구현. serializable, runnable.  
+    const winBalls = shuffle.slice(0,6).sort((a,b)=>b-a);   //slice치즈 생각하기. slice()는 추출, splice()는 값을 꺼내옴(삭제됨)
+    const bonus = shuffle[6];
+    console.log("==>"+winBalls+" : "+bonus);
+
+    //로또 번호 화면에 출력(애니메이션으로 1초 간격)
+    const $result = document.querySelector('#result');
+    const drawBall = (number, $parent)=>{
+        const $ball = document.createElement('div');    //div태그가 생성.
+        $ball.className = 'ball';
+
+        $ball.textContent = number;   //'추첨 결과는 : ' 값을 textContent로 가리킬 수 있
+        $parent.appendChild($ball);  //textContent 바로 옆에 값을 넣에됨으로 부모-자식 관계
+    };
+    let count = 0;
+    //로또번호 6개를 화면에 출력, 단 1초간격으로
+    for(let i=0; i<winBalls.length; i++){
+        setTimeout( () =>{  //()안에는 function이 들어간다.
+            drawBall(winBalls[i],$result);
+            count+=i+1;
+        }, (i+1)*1000)      //(i+1)*1000 == timeout?
+        count=i+1;
+    }
+    const $bonus = document.querySelector('#bonus');
+    setTimeout( () =>{  //()안에는 function이  들어간다.
+        drawBall(bonus, $bonus);
+
+        }, (count+1)*1000) 
+    
+    </script>
+
+</body>
+</html>
